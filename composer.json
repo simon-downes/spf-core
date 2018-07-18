@@ -1,0 +1,23 @@
+{
+    "name":        "simon-downes/spf-core",
+    "description": "SPF's interface library",
+    "keywords":    ["framework", "php", "spf"],
+    "license":     "MIT",
+    "authors": [
+        {
+            "name":     "Simon Downes",
+            "email":    "simon@simondownes.co.uk",
+            "homepage": "https://simondownes.co.uk",
+            "role":     "Developer"
+        }
+    ],
+    "require": {
+        "php": "~7.2"
+        "simon-downes/spf-contracts": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "spf\\": "src/"
+        }
+    }
+}
