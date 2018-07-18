@@ -1,6 +1,6 @@
 {
     "name":        "simon-downes/spf-core",
-    "description": "SPF's interface library",
+    "description": "The lightweight core of SPF - Simon's PHP Framework",
     "keywords":    ["framework", "php", "spf"],
     "license":     "MIT",
     "authors": [
