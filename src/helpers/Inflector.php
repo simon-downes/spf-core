@@ -108,7 +108,7 @@ class Inflector {
 
         // check for matches using regular expressions
         foreach( self::$plural as $pattern => $result ) {
-            if( preg_match( $pattern, $str ) ) {
+            if( preg_match($pattern, $str) ) {
                 return preg_replace($pattern, $result, $str);
             }
         }

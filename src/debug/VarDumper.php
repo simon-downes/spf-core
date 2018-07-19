@@ -98,7 +98,7 @@ class VarDumper implements Dumper {
             return $item;
         }
         elseif( $obj instanceof Dumpable ) {
-            $item = $obj->dump(get_called_class(), $this->depth + 1);
+            $item = $obj->dump($this);
             if( $item ) {
                 return $item;
             }
@@ -282,7 +282,6 @@ class VarDumper implements Dumper {
         if( end($this->stack) === $obj ) {
             return '**SELF**';
         }
-
         elseif( in_array($obj, $this->stack) ) {
             return '**RECURSION**';
         }

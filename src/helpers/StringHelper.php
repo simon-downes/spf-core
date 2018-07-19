@@ -5,7 +5,7 @@
  */
 namespace spf\helpers;
 
-use InvalidArgummentException;
+use InvalidArgumentException;
 
 class StringHelper {
 
@@ -61,7 +61,7 @@ class StringHelper {
     public static function randomHex( int $length = 40 ): string {
 
         if( ($length % 2) == 1 ) {
-            throw new InvalidArgummentException("Hex strings must be an even number in length");
+            throw new InvalidArgumentException("Hex strings must be an even number in length");
         }
 
         $hex = bin2hex(random_bytes((int) ceil($length / 2)));
@@ -194,7 +194,7 @@ class StringHelper {
 
         // if tens digit is 1, 2 or 3 then use th instead of usual ordinal
         if( ($n % 100) >= 11 && ($n % 100) <= 13 ) {
-           return "{$n}th";
+            return "{$n}th";
         }
 
         return "{$n}{$ends[$n % 10]}";
