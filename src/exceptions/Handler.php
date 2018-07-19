@@ -12,36 +12,36 @@ use spf\contracts\exceptions\Handler as ExceptionHandler;
 
 class Handler implements ExceptionHandler {
 
-	protected $error_page;
+    protected $error_page;
 
-	public function __construct( string $error_page = '' ) {
+    public function __construct( string $error_page = '' ) {
 
-		if( empty($error_page) ) {
-			$error_page = __DIR__. '/error.php';
-		}
+        if( empty($error_page) ) {
+            $error_page = __DIR__. '/error.php';
+        }
 
-		if( !file_exists($error_page) ) {
-			throw new InvalidArgumentException("Invalid error page: {$error_page}");
-		}
+        if( !file_exists($error_page) ) {
+            throw new InvalidArgumentException("Invalid error page: {$error_page}");
+        }
 
-		$this->error_page = $error_page;
+        $this->error_page = $error_page;
 
-	}
+    }
 
-	public function handle( Throwable $error ) {
+    public function handle( Throwable $error ) {
 
-		if( SPF::isCLI() ) {
-			SPF::dump($error);
-		}
-		// debug error page
-		elseif( SPF::isDebug() ) {
-			require __DIR__. '/error.debug.php';
-		}
-		// production error page
-		else {
-			require $this->error_page;
-		}
+        if( SPF::isCLI() ) {
+            SPF::dump($error);
+        }
+        // debug error page
+        elseif( SPF::isDebug() ) {
+            require __DIR__. '/error.debug.php';
+        }
+        // production error page
+        else {
+            require $this->error_page;
+        }
 
-	}
+    }
 
 }
