@@ -101,19 +101,19 @@ class Inflector {
         // check for irregular singular forms
         foreach( self::$irregular as $pattern => $result ) {
             $pattern = '/' . $pattern . '$/iu';
-            if ( preg_match($pattern, $str) ) {
+            if( preg_match($pattern, $str) ) {
                 return preg_replace($pattern, $result, $str);
             }
         }
 
         // check for matches using regular expressions
-        foreach( self::$plural as $pattern => $result )         {
+        foreach( self::$plural as $pattern => $result ) {
             if( preg_match( $pattern, $str ) ) {
                 return preg_replace($pattern, $result, $str);
             }
         }
 
-        return $string;
+        return $str;
 
     }
 

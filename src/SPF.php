@@ -105,6 +105,7 @@ class SPF {
                 if( error_reporting() & $severity ) {
                     throw new ErrorException($message, 0, $severity, $file, $line);
                 }
+                return false;
             });
 
             $result = call_user_func_array($callable, $args);

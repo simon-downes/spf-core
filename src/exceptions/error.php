@@ -5,7 +5,7 @@ ini_set('display_errors', 'off');
 // use default php error handler
 set_error_handler(
     function( $severity, $message, $file, $line ) {
-      return false;
+        return false;
     }
 );
 

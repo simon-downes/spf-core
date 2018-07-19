@@ -5,9 +5,9 @@
  */
 namespace spf\debug;
 
-use Throwable, ReflectionClass, ReflectionObject;
+use Throwable, ErrorException, ReflectionClass, ReflectionObject;
 
-use spf\contracts\support\Dumper;
+use spf\contracts\support\{Dumper, Dumpable};
 
 class VarDumper implements Dumper {
 
@@ -99,11 +99,13 @@ class VarDumper implements Dumper {
         }
         elseif( $obj instanceof Dumpable ) {
             $item = $obj->dump(get_called_class(), $this->depth + 1);
-            if( $item )
+            if( $item ) {
                 return $item;
+            }
         }
-        elseif( $obj instanceof Throwable )
+        elseif( $obj instanceof Throwable ) {
             return $this->dumpThrowable($obj);
+        }
 
         $this->stack[] = $obj;
 
@@ -136,7 +138,7 @@ class VarDumper implements Dumper {
             'previous' => $e->getPrevious(),
         ];
 
-        if( $e instanceof \ErrorException ) {
+        if( $e instanceof ErrorException ) {
             $lookup = [
                 E_ERROR             => 'ERROR',
                 E_WARNING           => 'WARNING',
@@ -210,7 +212,7 @@ class VarDumper implements Dumper {
 
     }
 
-    protected function dumpTrace( array $trace ): string {
+    protected function dumpTrace( array $trace ): array {
 
         $lines = [];
 
@@ -218,15 +220,17 @@ class VarDumper implements Dumper {
 
             $line = '';
 
-            if( isset($frame['class']) )
+            if( isset($frame['class']) ) {
                 $line .= $frame['class']. $frame['type'];
+            }
 
             $line .= $frame['function']. '()';
 
             if( isset($frame['file']) ) {
                 $line .= ' ['. $frame['file'];
-                if( isset($frame['line']) )
+                if( isset($frame['line']) ) {
                     $line .= ':'. $frame['line'];
+                }
                 $line .= ']';
             }
 
@@ -264,8 +268,9 @@ class VarDumper implements Dumper {
 
         if( $parent = $class->getParentClass() ) {
             $parent_props = $this->getClassProperties($parent);
-            if(count($parent_props) > 0)
+            if(count($parent_props) > 0) {
                 $properties = array_merge($parent_props, $properties);
+            }
         }
 
         return $properties;
@@ -274,11 +279,13 @@ class VarDumper implements Dumper {
 
     protected function recursionCheck( object $obj ): string {
 
-        if( end($this->stack) === $obj )
+        if( end($this->stack) === $obj ) {
             return '**SELF**';
+        }
 
-        elseif( in_array($obj, $this->stack) )
+        elseif( in_array($obj, $this->stack) ) {
             return '**RECURSION**';
+        }
 
         return '';
 

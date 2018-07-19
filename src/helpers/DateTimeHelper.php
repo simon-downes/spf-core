@@ -93,7 +93,7 @@ class DateTimeHelper {
 
         }
 
-        return ($hours * 3600) + ($minutes * 60) + $seconds;
+        return intval(($hours * 3600) + ($minutes * 60) + $seconds);
 
     }
 

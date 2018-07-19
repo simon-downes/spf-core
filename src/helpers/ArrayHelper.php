@@ -181,7 +181,7 @@ class ArrayHelper {
                 if( $lhs < $rhs ) {
                     return -1 * $sort_order;
                 }
-                else if ($lhs > $rhs) {
+                elseif( $lhs > $rhs ) {
                     return 1 * $sort_order;
                 }
 

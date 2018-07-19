@@ -92,7 +92,7 @@ class StringHelper {
     public static function uncamelise( string $str ): string {
         return mb_strtolower(
             preg_replace(
-                '/^A-Z^a-z^0-9]+/',  '_',
+                '/^A-Z^a-z^0-9]+/', '_',
                 preg_replace('/([a-z\d])([A-Z])/u', '$1_$2',
                     preg_replace('/([A-Z+])([A-Z][a-z])/u', '$1_$2', $str)
                 )
@@ -266,7 +266,7 @@ class StringHelper {
             $old = $str;
             $str = preg_replace('#</*(?:applet|b(?:ase|gsound|link)|body|embed|frame(?:set)?|head|html|i(?:frame|layer)|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|title|xml)[^>]*+>#iu', '', $str);
         }
-        while ($old !== $str);
+        while( $old !== $str );
 
         return $str;
 
@@ -281,7 +281,7 @@ class StringHelper {
             // 00-08, 11, 12, 14-31, 127
             $str = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/Su', '', $str, -1, $count);
         }
-        while ($count);
+        while( $count );
 
         return $str;
 
