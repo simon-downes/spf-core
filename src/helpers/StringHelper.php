@@ -25,7 +25,7 @@ class StringHelper {
      */
     public static function parseURL( string $url, array $defaults = [] ) {
 
-        $parts = is_string($url) ? \parse_url(urldecode($url)) : $url;
+        $parts = parse_url(urldecode($url));
 
         $select = function( $k ) use ( $parts, $defaults ) {
             if( isset($parts[$k]) ) {
